@@ -1,0 +1,50 @@
+@using System.ComponentModel.DataAnnotations
+@page "/register"
+@inject SessionService Session
+@inject AttendanceService Attendance
+
+<h2>Event Registration</h2>
+
+<EditForm Model="@registration" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="mb-3">
+        <label>Name</label>
+        <InputText class="form-control" @bind-Value="registration.Name" />
+    </div>
+
+    <div class="mb-3">
+        <label>Email</label>
+        <InputText class="form-control" @bind-Value="registration.Email" />
+    </div>
+
+    <button class="btn btn-primary">Register</button>
+</EditForm>
+
+@if (submitted)
+{
+    <p class="text-success">Registration successful!</p>
+}
+
+@code {
+    private RegistrationModel registration = new();
+    private bool submitted = false;
+
+    private void HandleSubmit()
+    {
+        Session.CurrentUserName = registration.Name;
+        Attendance.AddAttendee(registration.Name);
+        submitted = true;
+    }
+
+    public class RegistrationModel
+    {
+        [Required]
+        public string Name { get; set; } = string.Empty;
+
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = string.Empty;
+    }
+}

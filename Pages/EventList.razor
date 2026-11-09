@@ -1,0 +1,27 @@
+@page "/events"
+@using EventEaseApp.Components
+@using Microsoft.AspNetCore.Components.Web.Virtualization
+
+<h2>Upcoming Events</h2>
+
+<Virtualize Items="Events" Context="ev">
+    <EventCard EventName="@ev.Name"
+               EventDate="@ev.Date"
+               Location="@ev.Location" />
+</Virtualize>
+
+@code {
+    public class EventInfo
+    {
+        public string Name { get; set; } = string.Empty;
+        public DateTime Date { get; set; }
+        public string Location { get; set; } = string.Empty;
+    }
+
+    List<EventInfo> Events = new()
+    {
+        new EventInfo { Name = "Corporate Summit", Date = DateTime.Now.AddDays(10), Location = "Dallas" },
+        new EventInfo { Name = "Marketing Expo", Date = DateTime.Now.AddDays(20), Location = "Austin" },
+        new EventInfo { Name = "Tech Mixer", Date = DateTime.Now.AddDays(30), Location = "Houston" }
+    };
+}

@@ -1,0 +1,11 @@
+@page "/attendance"
+@inject AttendanceService AttendanceService
+
+<h2>Event Attendance</h2>
+
+<ul>
+    @foreach (var person in AttendanceService.Attendees)
+    {
+        <li>@person</li>
+    }
+</ul>

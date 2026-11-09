@@ -1,0 +1,13 @@
+﻿<Router AppAssembly="@typeof(App).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" />
+    </Found>
+
+    <NotFound>
+        <div class="event-card">
+            <h3>Page Not Found</h3>
+            <p>The page you’re looking for doesn’t exist.</p>
+            <a href="/events">Return to Events</a>
+        </div>
+    </NotFound>
+</Router>
